@@ -1,4 +1,4 @@
-package com.foodexpress.adminservice.common.util;
+package com.yeseung.sgyjspringbootstarter.util;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;
