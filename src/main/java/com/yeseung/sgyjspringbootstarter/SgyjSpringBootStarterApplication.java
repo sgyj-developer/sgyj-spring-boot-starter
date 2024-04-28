@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
-@ConfigurationPropertiesScan(basePackages = "com.yeseung")
+@ConfigurationPropertiesScan(basePackages = {"com.yeseung", "com.ulisesbocchio.jasyptspringboot.properties"})
 public class SgyjSpringBootStarterApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SgyjSpringBootStarterApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SgyjSpringBootStarterApplication.class, args);
+    }
 
 }

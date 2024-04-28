@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: sgyj-spring-boot-starter
+jasypt:
+  encryptor:
+    algorithm: PBEWithSHA1AndDESede
+    key-obtention-iterations: 1000
+    pool-size: 1
+    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
+    string-output-type: base64
+    password: "vnemdlrtmvmfptm!@wktmv#$qlalfqjsgh$#"
