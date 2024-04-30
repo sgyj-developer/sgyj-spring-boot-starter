@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.1.0"
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.6'
@@ -24,13 +30,16 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     // https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
     implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.5'
     // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
     implementation group: 'org.bouncycastle', name: 'bcprov-jdk18on', version: '1.78.1'
-
+    //querydsl 추가
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -42,3 +51,25 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+
+//querydsl 추가 시작
+
+// Querydsl 설정부
+def generated = layout.buildDirectory.dir("generated/querydsl").get().asFile
+
+// querydsl QClass 파일 생성 위치를 지정
+tasks.withType(JavaCompile).configureEach {
+    options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
+
+// java source set 에 querydsl QClass 위치 추가
+sourceSets {
+    main.java.srcDirs += [generated]
+}
+
+// gradle clean 시에 QClass 디렉토리 삭제
+clean {
+    delete file(generated)
+}
+//querydsl 추가 끝
