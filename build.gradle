@@ -11,7 +11,7 @@ plugins {
 }
 
 group = 'com.yeseung'
-version = '0.0.1-SNAPSHOT'
+version = '3.2.6'
 
 java {
     sourceCompatibility = '21'
